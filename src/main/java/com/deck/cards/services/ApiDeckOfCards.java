@@ -15,11 +15,12 @@ public interface ApiDeckOfCards {
     DeckDto newDeck(boolean jokers_enabled);
 
     //Embaralhar as cartas
-    @GetMapping("new/shuffle/")
-    DeckDto shuffle(@RequestParam("deck_count") int deck_count);
+    @GetMapping("{deck_id}/shuffle/")
+    DeckDto shuffle(@PathVariable("deck_id") String deckId);
 
     //Compre uma carta
     @GetMapping("{deck_id}/draw/")
     DeckDto drawCard(@PathVariable("deck_id") String deckId, @RequestParam("count") int count);
+
 
 }

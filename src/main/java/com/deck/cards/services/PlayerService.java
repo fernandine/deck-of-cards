@@ -11,18 +11,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class PlayerService {
+public class PlayerService  {
     @Autowired
     private ApiDeckOfCards apiDeckOfCards;
     @Autowired
     private PlayerRepository repository;
     @Autowired
     private ModelMapper modelMapper;
+    @Autowired
+    private DeckService deckService;
 
     @Transactional(readOnly = true)
     public List<PlayerDto> findAll() {
@@ -42,13 +43,13 @@ public class PlayerService {
             throw new ResourceNotFoundException("Nenhum jogador encontrado.");
         }
 
-        // Cria o baralho e embaralha.
-        DeckDto response = apiDeckOfCards.newDeck(true);
-        apiDeckOfCards.shuffle(1);
+        // Cria e embaralha um novo baralho
+        DeckDto deck = deckService.createDeck(true);
+        deckService.shuffleDeck(deck.getDeckId());
 
         for (PlayerDto player : players) {
-            DeckDto drawResult = apiDeckOfCards.drawCard(response.getDeckId(), 5);
-            List<CardDto> dtos = drawResult.getCards();
+            //Cria 5 cartas para cada jogador
+            List<CardDto> dtos = deckService.drawCards(deck.getDeckId(), 5);
 
             player.setCards(dtos);
             player.winner(players);
@@ -57,8 +58,7 @@ public class PlayerService {
             repository.save(entity);
         }
 
-            return players;
-
+        return players;
     }
 }
 

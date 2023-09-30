@@ -1,6 +1,7 @@
 package com.deck.cards.Dtos;
 
 import com.deck.cards.entities.Player;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,6 +21,7 @@ public class PlayerDto implements Serializable {
     private String name;
     private Boolean winner;
     private int total;
+    
     private List<CardDto> cards = new ArrayList<>();
 
     public void winner(List<PlayerDto> players) {
