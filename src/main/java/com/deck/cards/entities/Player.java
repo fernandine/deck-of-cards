@@ -17,9 +17,10 @@ public class Player implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String name;
     private Boolean winner;
-    @Column(name = "card_sum")
-    private int CardSum;
+
+    private int total;
 
     @OneToMany(mappedBy = "player")
     private List<Cards> cards;

@@ -46,9 +46,6 @@ public class PlayerService {
         DeckDto response = apiDeckOfCards.newDeck(true);
         apiDeckOfCards.shuffle(1);
 
-        PlayerDto winner = null;
-        int maxScore = -1;
-
         for (PlayerDto player : players) {
             DeckDto drawResult = apiDeckOfCards.drawCard(response.getDeckId(), 5);
             List<CardDto> dtos = drawResult.getCards();
@@ -56,26 +53,13 @@ public class PlayerService {
             player.setCards(dtos);
             player.winner(players);
 
-            int playerScore = player.winner(players);
-
-            if (playerScore > maxScore) {
-                maxScore = playerScore;
-                winner = player;
-            } else if (playerScore == maxScore) {
-                winner = null;
-            }
-
             Player entity = modelMapper.map(player, Player.class);
             repository.save(entity);
         }
 
-        if (winner != null) {
-            return Collections.singletonList(winner);
-        } else {
             return players;
-        }
-    }
 
+    }
 }
 
 

@@ -24,5 +24,4 @@ public class DeckDto implements Serializable {
 
     private List<CardDto> cards = new ArrayList<>();
 
-
 }

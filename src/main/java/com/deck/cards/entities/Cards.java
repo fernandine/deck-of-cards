@@ -10,11 +10,11 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "tb_cards")
+//@Table(name = "tb_cards")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cards extends CardDto implements Serializable {
+public class Cards implements Serializable {
 
     @JsonIgnore
     @Id
@@ -26,9 +26,8 @@ public class Cards extends CardDto implements Serializable {
     private String value;
     private String suit;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "player_id")
     private Player player;
-
 
 }
