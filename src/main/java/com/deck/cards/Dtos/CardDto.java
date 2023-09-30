@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Getter
 @Setter
@@ -21,18 +22,23 @@ public class CardDto implements Serializable {
     private String value;
     private String suit;
 
-    public int getValueCard() {
-        switch (value) {
-            case "ACE":
-                return 1;
-            case "KING":
-                return 13;
-            case "QUEEN":
-                return 12;
-            case "JACK":
-                return 11;
-            default:
-                return Integer.parseInt(value);
+    public int calculateHandScore(List<CardDto> cards) {
+        int score = 0;
+        for (CardDto card : cards) {
+            String value = card.getValue();
+            if ("ACE".equals(value)) {
+                score += 1;
+            } else if ("KING".equals(value)) {
+                score += 13;
+            } else if ("QUEEN".equals(value)) {
+                score += 12;
+            } else if ("JACK".equals(value)) {
+                score += 11;
+            } else {
+                score += Integer.parseInt(value);
+            }
         }
+        return score;
     }
 }
+
