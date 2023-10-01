@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class CardDto implements Serializable {
     private Long id;
     @JsonIgnore
     private String code;
-
+    @NotBlank
     private String value;
     private String suit;
 

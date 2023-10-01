@@ -16,8 +16,7 @@
 --  PRIMARY KEY (id),
 --  FOREIGN KEY (player_id) REFERENCES tb_player(id)
 --);
-INSERT INTO tb_player(name, winner, total) VALUES ('jogador 1', false, 0);
-INSERT INTO tb_player(name, winner, total) VALUES ('jogador 2', false, 0);
-INSERT INTO tb_player(name, winner, total) VALUES ('jogador 3', false, 0);
-INSERT INTO tb_player(name, winner, total) VALUES ('jogador 4', false, 0);
-
+INSERT INTO tb_player(name, points) VALUES ('jogador 1', 0);
+INSERT INTO tb_player(name, points) VALUES ('jogador 2', 0);
+INSERT INTO tb_player(name, points) VALUES ('jogador 3', 0);
+INSERT INTO tb_player(name, points) VALUES ('jogador 4', 0);

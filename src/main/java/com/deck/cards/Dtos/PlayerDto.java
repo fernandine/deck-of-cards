@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +18,13 @@ import java.util.List;
 @NoArgsConstructor
 public class PlayerDto implements Serializable {
 
+    @JsonIgnore
     private Long id;
+    @NotBlank
     private String name;
     private Boolean winner;
-    private int total;
-    
+    private Integer points;
+
     private List<CardDto> cards = new ArrayList<>();
 
     public void winner(List<PlayerDto> players) {
@@ -32,12 +35,12 @@ public class PlayerDto implements Serializable {
             for (CardDto card : player.getCards()) {
                 cardSum += card.getValueCard();
             }
-            player.setTotal(cardSum);
+            player.setPoints(cardSum);
 
             maxSum = Math.max(maxSum, cardSum);
         }
         for (PlayerDto player : players) {
-            player.setWinner(player.getTotal() == maxSum);
+            player.setWinner(player.getPoints() == maxSum);
         }
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,23 +44,23 @@ public class PlayerService  {
             throw new ResourceNotFoundException("Nenhum jogador encontrado.");
         }
 
-        // Cria e embaralha um novo baralho
+        //Cria e embaralha um novo baralho
         DeckDto deck = deckService.createDeck(true);
         deckService.shuffleDeck(deck.getDeckId());
 
-        for (PlayerDto player : players) {
+        for (PlayerDto playerDto : players) {
             //Cria 5 cartas para cada jogador
             List<CardDto> dtos = deckService.drawCards(deck.getDeckId(), 5);
+            playerDto.setCards(dtos);
+            playerDto.winner(players);
 
-            player.setCards(dtos);
-            player.winner(players);
-
-            Player entity = modelMapper.map(player, Player.class);
-            repository.save(entity);
+            Player player = modelMapper.map(playerDto, Player.class);
+            repository.save(player);
         }
 
         return players;
     }
-}
+
+    }
 
 

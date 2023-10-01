@@ -17,5 +17,4 @@ public class Deck implements Serializable {
     private boolean success;
     private int remaining;
     private boolean shuffled;
-
 }

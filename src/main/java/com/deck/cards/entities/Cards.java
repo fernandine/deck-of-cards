@@ -10,13 +10,12 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 @Entity
-//@Table(name = "tb_cards")
+@Table(name = "tb_cards")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Cards implements Serializable {
 
-    @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
