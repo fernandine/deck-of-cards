@@ -11,12 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class PlayerService  {
+public class PlayerService {
     @Autowired
     private ApiDeckOfCards apiDeckOfCards;
     @Autowired
@@ -32,6 +31,13 @@ public class PlayerService  {
         return list.stream()
                 .map(entity -> modelMapper.map(entity, PlayerDto.class))
                 .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public PlayerDto insert(PlayerDto dto) {
+        Player player = modelMapper.map(dto, Player.class);
+        player = repository.save(player);
+        return modelMapper.map(player, PlayerDto.class);
     }
 
     @Transactional
@@ -54,13 +60,11 @@ public class PlayerService  {
             playerDto.setCards(dtos);
             playerDto.winner(players);
 
-            Player player = modelMapper.map(playerDto, Player.class);
-            repository.save(player);
+            insert(playerDto);
         }
 
         return players;
     }
-
-    }
+}
 
 

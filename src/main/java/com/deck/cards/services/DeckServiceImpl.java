@@ -16,7 +16,6 @@ public class DeckServiceImpl implements DeckService {
     public DeckDto createDeck(boolean includeJokers) {
         return apiDeckOfCards.newDeck(includeJokers);
     }
-
     @Override
     public DeckDto shuffleDeck(String deckId) {
         return apiDeckOfCards.shuffle(deckId);

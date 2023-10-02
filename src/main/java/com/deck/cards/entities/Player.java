@@ -2,6 +2,7 @@ package com.deck.cards.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -21,7 +22,7 @@ public class Player implements Serializable {
     private Boolean winner;
     private Integer points;
 
-    @OneToMany(mappedBy = "player", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "player")
     private List<Cards> cards;
 
 }

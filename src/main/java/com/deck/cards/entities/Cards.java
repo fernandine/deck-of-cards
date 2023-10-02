@@ -25,8 +25,7 @@ public class Cards implements Serializable {
     private String value;
     private String suit;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "player_id")
     private Player player;
-
 }
